@@ -1,6 +1,6 @@
 # 欢迎来到 Lean 的 LEDE 源码仓库
 
-如何编译自己需要的 LEDE 固件 [How to build your LEDE firmware](./README_EN.md)
+I18N: [English](README_EN.md) | [简体中文](README.md)
 
 ## 官方讨论群
 如有技术问题需要讨论或者交流，欢迎加入以下群：
@@ -10,6 +10,9 @@
 
 <a href ="https://item.taobao.com/item.htm?spm=a230r.1.14.11.4bb55247rdHEAP&id=702787603594&ns=1&abbucket=17#detail
 "><img src="https://github.com/coolsnowwolf/lede/blob/master/doc/h68k.jpg?raw=true" width=600  /></a>
+
+4. Rockchip RK3588 预编译固件发布 Release 下载更新地址 (包括 R6S/R6C/NanoPC-T6 )：<https://github.com/coolsnowwolf/lede/releases/tag/20230609>
+
 
 ## 注意
 
@@ -32,7 +35,7 @@
    libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz \
    mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 python3-pyelftools \
    libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip \
-   vim wget xmlto xxd zlib1g-dev
+   vim wget xmlto xxd zlib1g-dev python3-setuptools
    ```
 
 3. 下载源代码，更新 feeds 并选择配置
@@ -87,6 +90,23 @@ make V=s -j$(nproc)
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
+由于默认情况下，装载到 WSL 发行版的 NTFS 格式的驱动器将不区分大小写，因此大概率在 WSL/WSL2 的编译检查中会返回以下错误：
+
+```txt
+Build dependency: OpenWrt can only be built on a case-sensitive filesystem 
+```
+
+一个比较简洁的解决方法是，在 `git clone` 前先创建 Repository 目录，并为其启用大小写敏感：
+
+```powershell
+# 以管理员身份打开终端
+PS > fsutil.exe file setCaseSensitiveInfo <your_local_lede_path> enable
+# 将本项目 git clone 到开启了大小写敏感的目录 <your_local_lede_path> 中
+PS > git clone git@github.com:coolsnowwolf/lede.git <your_local_lede_path>
+```
+
+> 对已经 `git clone` 完成的项目目录执行 `fsutil.exe` 命令无法生效，大小写敏感只对新增的文件变更有效。
+
 ### macOS 原生系统进行编译
 
 1. 在 AppStore 中安装 Xcode
@@ -132,13 +152,13 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 ## 软路由介绍
 
-iKOOLCORE 硬酷R1 多网口小主机 - N5105/N6005 : Cube box, rest fun. 方寸之间，尽享乐趣
+硬酷R2 - N95/N300迷你四网HomeLab服务器
 
 (商品介绍页面 - 硬酷科技（支持花呗）)：
-[优惠券链接](https://taoquan.taobao.com/coupon/unify_apply.htm?sellerId=2208215115814&activityId=85fbaf791c4b45e9aaf5ec8e3d1cb2a9)
-[下单链接](https://item.taobao.com/item.htm?ft=t&id=682987219699)
 
-[![r1](doc/r1.jpg)](https://item.taobao.com/item.htm?ft=t&id=682025492099)
+[预售链接](https://item.taobao.com/item.htm?ft=t&id=719159813003)
+
+[![r1](doc/r1.jpg)](https://item.taobao.com/item.htm?ft=t&id=719159813003)
 
 ## 捐贈
 

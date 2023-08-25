@@ -9,9 +9,9 @@ PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=https://github.com/rockchip-linux/rkbin.git
-PKG_SOURCE_DATE:=2022-08-01
-PKG_SOURCE_VERSION:=b0c100f1a260d807df450019774993c761beb79d
-PKG_MIRROR_HASH:=17723ac8f6ec446c759444ee29ba4fe544cebb3785e26d8e10c91c54b9df3f1a
+PKG_SOURCE_DATE:=2023-07-26
+PKG_SOURCE_VERSION:=b4558da0860ca48bf1a571dd33ccba580b9abe23
+PKG_MIRROR_HASH:=50e904a9d53466449155ff8f80522ffdfe7fb36a2ff13055416259e1468c07bf
 
 PKG_MAINTAINER:=Tianling Shen <cnsztl@immortalwrt.org>
 
@@ -49,6 +49,12 @@ define Package/arm-trusted-firmware-rk3568
     VARIANT:=rk3568
 endef
 
+define Package/arm-trusted-firmware-rk3588
+    $(Package/arm-trusted-firmware-rockchip-vendor)
+    DEPENDS:=@TARGET_rockchip_armv8
+    VARIANT:=rk3588
+endef
+
 define Build/Configure
 	$(SED) 's,$$$$(PKG_BUILD_DIR),$(PKG_BUILD_DIR),g' $(PKG_BUILD_DIR)/trust.ini
 	$(SED) 's,$$$$(VARIANT),$(BUILD_VARIANT),g' $(PKG_BUILD_DIR)/trust.ini
@@ -75,7 +81,11 @@ endef
 define Package/arm-trusted-firmware-rk3568/install
 endef
 
+define Package/arm-trusted-firmware-rk3588/install
+endef
+
 $(eval $(call BuildPackage,arm-trusted-firmware-rk3328))
 $(eval $(call BuildPackage,arm-trusted-firmware-rk3399))
 $(eval $(call BuildPackage,arm-trusted-firmware-rk3566))
 $(eval $(call BuildPackage,arm-trusted-firmware-rk3568))
+$(eval $(call BuildPackage,arm-trusted-firmware-rk3588))
